@@ -1,4 +1,5 @@
 const { User, Thought } = require('../models');
+const mongoose = require('mongoose');
 
 module.exports = {
     async getUsers(req, res) {
@@ -11,7 +12,10 @@ module.exports = {
     },
     async getSingleUser(req, res) {
         try {
-            const user = await User.findOne({ _id: req.parans.userId })
+            if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
+                return res.status(400).json({ message: 'Invalid User ID' });
+            }
+            const user = await User.findById({ _id: req.params.userId })
             .populate('thoughts')
             .populate('friends');
 
@@ -21,6 +25,7 @@ module.exports = {
 
             res.json(user);
         } catch (err) {
+            console.error(err);
             res.status(500).json(err);
         }
     },
@@ -41,7 +46,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    async createUser(res, res) {
+    async createUser(req, res) {
         try {
             const user = await User.create(req.body);
             res.json(user);

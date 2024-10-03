@@ -13,7 +13,7 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validiate: {
+            validate: {
                 validator: (e) => validator.isEmail(e),
                 message: (props) => `${props.value} is not valid email`
             }
@@ -21,13 +21,13 @@ const userSchema = new Schema(
         thoughts: [
             {
             type: Schema.Types.ObjectId,
-            ref: 'Thought'
+            ref: 'thought'
           }
         ],
         friends: [
             {
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'user'
         }
       ]
     },
