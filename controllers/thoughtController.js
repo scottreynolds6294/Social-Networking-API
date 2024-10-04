@@ -34,7 +34,7 @@ module.exports = {
             }
             res.json(newThought);
         } catch (err) {
-            res.status(500),json(err);
+            res.status(500).json(err);
         }
     },
     async updateThought(req, res) {

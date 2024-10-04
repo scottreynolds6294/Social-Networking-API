@@ -117,7 +117,7 @@ connection.once('open', async () => {
                 ],
             },
         ]);
-        console.log('Thoughts seeded');
+        console.log('Thoughts and Reactions seeded');
 
         const friendships = [
             { user: users[0]._id, friends: [users[1]._id, users[2]._id] },
